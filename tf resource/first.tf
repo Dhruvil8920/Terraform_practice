@@ -47,7 +47,7 @@ resource "azurerm_storage_container" "tfcontainer" {
 }
 
 resource "azurerm_storage_blob" "tfblob" {
-  name                   = "some-local-file.zip"
+  name                   = "blobfile"
   storage_account_name   = azurerm_storage_account.tfstorage1.name
   storage_container_name = azurerm_storage_container.tfcontainer.name
   type                   = "Block"
