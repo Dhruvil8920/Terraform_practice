@@ -1,30 +1,7 @@
-provider "github" {
-  token = " ${var.tokenForGitHub} "
-}
-
 resource "github_repository" "terraform-first" {
   name        = "${var.NameOfGitRepo}"
   visibility = "public"
   auto_init = true
-}
-
-terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "3.47.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  skip_provider_registration = true
-  features {
-  }
-    client_id = var.client_id
-    client_secret= var.client_secret
-    tenant_id = var.tenant_id
-    subscription_id = var.subscription_id
 }
 
 resource "azurerm_resource_group" "azure-resource" {
