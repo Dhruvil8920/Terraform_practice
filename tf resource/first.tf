@@ -52,3 +52,10 @@ resource "azurerm_storage_blob" "tfblob" {
   storage_container_name = azurerm_storage_container.tfcontainer.name
   type                   = "Block"
 }
+
+resource "azurerm_databricks_workspace" "tfworkspace" {
+  name                = "tfdatabricks-2"
+  resource_group_name = azurerm_resource_group.azure-resource.name
+  location            = azurerm_resource_group.azure-resource.location
+  sku                 = "standard"
+}
