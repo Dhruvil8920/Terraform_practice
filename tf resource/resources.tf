@@ -1,9 +1,3 @@
-resource "github_repository" "terraform-first" {
-  name        = "${var.NameOfGitRepo}"
-  visibility = "public"
-  auto_init = true
-}
-
 resource "azurerm_resource_group" "azure-resource" {
   location = "centralindia"
   name     = "tfrg"
@@ -35,4 +29,15 @@ resource "azurerm_databricks_workspace" "tfworkspace" {
   resource_group_name = azurerm_resource_group.azure-resource.name
   location            = azurerm_resource_group.azure-resource.location
   sku                 = "standard"
+}
+
+data "azuread_user" "user" {
+  user_principal_name = "alpha@pathakkunj1212gmail.onmicrosoft.com"
+}
+
+
+resource "azurerm_role_assignment" "Read" {
+  scope              = "/subscriptions/${var.subscription_id}/resourceGroups/azure-resource"
+  role_definition_id = "/subscriptions/${var.subscription_id}/providers/Microsoft.Authorization/roleDefinitions/<role-id>"
+  principal_id       = data.azuread_user.user.object_id
 }
